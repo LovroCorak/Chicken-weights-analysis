@@ -1,0 +1,40 @@
+---
+output:
+  html_document: default
+  pdf_document: default
+---
+
+# INTRODUCTION
+The aim of this practical session is to produce a data analysis report using chicwts R data set. This report explores the relationship between chicken weights and their feed.
+
+# Data
+```{r}
+data(chickwts)
+
+str(chickwts)
+head(chickwts)
+
+```
+# Results of the Data analysis
+```{r}
+summary(chickwts)
+
+aggregate(weight~feed, data = chickwts, FUN=function(x){c(Mean=mean(x), SD=sd(x), Median=median(x))})
+
+#aggregate(weight ~ feed, data = chickwts, FUN = function(x) {
+#  c(Mean = mean(x), SD = sd(x), Median = median(x))
+#})
+```
+# Graphical display
+```{r}
+boxplot(weight ~ feed, data = chickwts, 
+        main = "Chicken Weights by Feed Type",
+        xlab="Feed type",
+        ylab="Weights(g)",
+        col="lightblue",
+        las=1,
+        cex.axis = 0.8)
+
+```
+# Conclusion
+The descriptive statistics and the graphic representation clearly indicate that the type of feed affects chicken growth signficantly. Certain supplement feeds (like casein and sunflower) resulted in heigher average weights compared to others (such as horsebean and linseed).
